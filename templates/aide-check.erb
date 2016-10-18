@@ -1,0 +1,14 @@
+#!/bin/sh
+TMPFILE=/var/tmp/aide-check.$$
+trap "rm -f $TMPFILE" EXIT
+set -o noclobber
+
+<%= @aide_path %> --check >$TMPFILE 2>&1
+
+if [ $? -ne 0 ] ; then
+  if [ -t 1 ] ; then
+    cat $TMPFILE
+  else
+    mail -s "AIDE report from `hostname`" <%= @mailto %> < $TMPFILE
+  fi
+fi
