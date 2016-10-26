@@ -1,7 +1,6 @@
 #!/bin/sh
 TMPFILE=/var/tmp/aide-check.$$
 trap "rm -f $TMPFILE" EXIT
-set -o noclobber
 
 <%= @aide_path %> --check >$TMPFILE 2>&1
 
