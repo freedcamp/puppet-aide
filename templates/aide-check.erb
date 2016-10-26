@@ -10,6 +10,6 @@ if [ $? -ne 0 ] ; then
   else
     <%= @aide_path %> --update >$TMPFILE 2>&1
     mail -s "AIDE report from `hostname`" <%= @mailto %> < $TMPFILE
-    mv -f <%= @db_temp_path %> <%= @db_path %>
+    cp -f <%= @db_temp_path %> <%= @db_path %>
   fi
 fi
